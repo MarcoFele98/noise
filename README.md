@@ -38,7 +38,7 @@ To fit the data, we first have to find the autocorrelation function for figuring
 
 ACF(τ)=⟨(M(t)−⟨M(t)⟩)(M(t+τ)−⟨M(t)⟩)⟩⟨(M(t)−⟨M(t)⟩)2⟩
 
-When I see an equation my first though is “how do I calculate that?”. In my opinion Tidyverse has some cool operations which can be used to translate the equation into a specific value. For example, the averages in the ACF are calculated over different things, which can be captured by grouping.
+When I see an equation my first though is “how do I calculate that?”. For example, the averages in the ACF are calculated over different things, which can be captured by grouping.
 
 The last part is to find the deterministic and stochastic component, which produce respectively the first and second moments (see paper for details). The first moment is the average “jump” from a specific population state. The second moment is the variance of such “jumps”. In this case there are only two possible individual states, only one degree of freedom to describe the state of the entire population, but in more complex cases a “jump” could be a vector in a multidimensional state space.
 
