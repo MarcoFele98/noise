@@ -5,26 +5,26 @@ Here is the replication of “Noise-induced effects in collective dynamics and i
 
 The code contains a function for exactly simulating runs from the master equation through the Gillespie algorithm. The Gillespie algorithm is divided in four main parts:
 
-1.- Find the velocity (or propensity) for every reaction. This is done by multiplying the reaction rate (which is conditioned on the reagents encountering each other) with the rate that the reagents do encounter each other. The rate that two reagents encounter each other can be found through the mass action assumption. Usually this is done simply by multiplying the concentration of the reagents, but this is an approximation that holds only for big population sizes because reagents do not interact with themselves, and the concentration of the species with and without one molecule can be quite different in small population sizes and sptial scale (omega). Hence it is possible to use the stochastic law of mass action, equal for one reaction to kΩ∏xi!(xi−1)!Ωsi
+1. Find the velocity (or propensity) for every reaction. This is done by multiplying the reaction rate (which is conditioned on the reagents encountering each other) with the rate that the reagents do encounter each other. The rate that two reagents encounter each other can be found through the mass action assumption. Usually this is done simply by multiplying the concentration of the reagents, but this is an approximation that holds only for big population sizes because reagents do not interact with themselves, and the concentration of the species with and without one molecule can be quite different in small population sizes and sptial scale (omega). Hence it is possible to use the stochastic law of mass action, equal for one reaction to kΩ∏xi!(xi−1)!Ωsi
  (for details see David Schnoerr et al (2017) J. Phys. A: Math. Theor. 50, 093001). Since there are some factorials, it is hard to compute in practice, and has been rearranged in the code implementation.
 
-2.- Find the waiting time before the next reaction occurs by sampling from an exponential distribution with mean rate equal to the sum of the reaction velocities.
+2. Find the waiting time before the next reaction occurs by sampling from an exponential distribution with mean rate equal to the sum of the reaction velocities.
 
-3.- Find the reaction that happens by choosing from the possible reactions with a probability proportional to the reaction velocity.
+3. Find the reaction that happens by choosing from the possible reactions with a probability proportional to the reaction velocity.
 
-4.- Update the states based on the reaction that happened.
+4. Update the states based on the reaction that happened.
 
 The function has not been optimized but works for simulating every type of system starting from the microscopic reactions. It performs only one update and must be inserted inside a for loop for producing the entire simulation. As input, it requires:
 
-1.- The current number of molecules/individuals in a specific state through a vector of size equal to the number of possible states and each entry the number of individuals in that state.
+1. The current number of molecules/individuals in a specific state through a vector of size equal to the number of possible states and each entry the number of individuals in that state.
 
-2.- A vector containing the reaction rates.
+2. A vector containing the reaction rates.
 
-3.- A matrix indicating the stoichiometry of the reagents, with the number of rows equal to the number of reactions, and number of columns equal to the number of possible states, and entries equal to the number of species of that state that must encounter to produce the specific reaction.
+3. A matrix indicating the stoichiometry of the reagents, with the number of rows equal to the number of reactions, and number of columns equal to the number of possible states, and entries equal to the number of species of that state that must encounter to produce the specific reaction.
 
-4.- A matrix indicating the stoichiometry of the products, with the number of rows equal to the number of reactions, and number of columns equal to the number of possible states, and entries equal to the number of species of that state that are produced from that specific reaction.
+4. A matrix indicating the stoichiometry of the products, with the number of rows equal to the number of reactions, and number of columns equal to the number of possible states, and entries equal to the number of species of that state that are produced from that specific reaction.
 
-5.- A parameter omega indicating the spatial scale of the system.
+5. A parameter omega indicating the spatial scale of the system.
 
 As output, it gives a vector containing the waiting time, the number of the reaction the occurred, and the new number of individuals/molecules in each state.
 
