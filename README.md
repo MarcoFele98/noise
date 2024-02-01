@@ -35,7 +35,7 @@ The replication of the results consists of two parts, one applied to the voter m
 
 To fit the data, we first have to find the autocorrelation function for figuring out the best time scale (see paper for details).
 
-ACF(τ)=⟨(M(t)−⟨M(t)⟩)(M(t+τ)−⟨M(t)⟩)⟩⟨(M(t)−⟨M(t)⟩)2⟩
+ACF(τ)=⟨(M(t)−⟨M(t)⟩)(M(t+τ)−⟨M(t)⟩)⟩ / ⟨(M(t)−⟨M(t)⟩)2⟩
 
 When I see an equation my first though is “how do I calculate that?”. For example, the averages in the ACF are calculated over different things, which can be captured by grouping in the code.
 
