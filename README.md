@@ -1,7 +1,7 @@
 # noise
 Here is the replication of “Noise-induced effects in collective dynamics and inferring local interactions from data”  Jhawar J, Guttal V. (2020) Phil. Trans. R. Soc. B 375: 20190381. http://dx.doi.org/10.1098/rstb.2019.0381
 
-## Gillespie algorithm
+## Part1: Gillespie algorithm
 
 The code contains a function for exactly simulating runs from the master equation through the Gillespie algorithm. The Gillespie algorithm is divided in four main parts:
 
@@ -30,16 +30,16 @@ As output, it gives a vector containing the waiting time, the number of the reac
 
 It could be a good test to modify the code to simulate clonal logistic growth by using these reactions: A -> 0 with rate 0.05, A -> 2A with rate 0.2, 2A -> A with rate 0.05. You can start multiple replicates by having only one individual and set omega to 50.
 
-Part 2 Replication of the results of the paper 
+## Part 2: Replication of the results of the paper 
 
-The replication of the results consists of two parts, one applied to the voter model, and one applied to the higher order interactions model (see the paper for details). The only difference between the two is that the higher order interactions also has a reaction of the type 2A + B -> 3A, which leads to a non-linear per capita rate of change in the ordinary differential equation and consensus formation with multi-stability in the limit of infinite population size (not present in the voter model). For each model it is shown examples of the dynamics through 20 replicates of the time series obtained iterating the Gillespie algorithm and the probability density of the population being in certain states. Interestingly, also the voter model shows consensus and multi-stability! This is because of the constructive effect of intrinsic noise. To better understand this result, it is possible to fit a Langevin equation to the time series we have simulated and find the functional form of the deterministic (drift) and stochastic (diffusion) terms. Despite the Langevin equation being an approximation, it explicitly defines a term for stochasticity, enabling us to investigate noise, quite cool.
+The replication of the results consists of two parts, one applied to the voter model, and one applied to the higher order interactions model (see the paper for details). The only difference between the two is that the higher order interactions also has a reaction of the type 2A + B -> 3A, which leads to a non-linear per capita rate of change in the ordinary differential equation and consensus formation with multi-stability in the limit of infinite population size (not present in the voter model). For each model it is shown examples of the dynamics through 20 replicates of the time series obtained iterating the Gillespie algorithm and the probability density of the population being in certain states. Interestingly, also the voter model shows consensus and multi-stability! This is because of the constructive effect of intrinsic noise. To better understand this result, it is possible to fit a Langevin equation to the time series we have simulated and find the functional form of the deterministic (drift) and stochastic (diffusion) terms. Despite the Langevin equation being an approximation, it explicitly defines a term for stochasticity, enabling us to investigate noise.
 
 To fit the data, we first have to find the autocorrelation function for figuring out the best time scale (see paper for details).
 
 ACF(τ)=⟨(M(t)−⟨M(t)⟩)(M(t+τ)−⟨M(t)⟩)⟩⟨(M(t)−⟨M(t)⟩)2⟩
 
-When I see an equation my first though is “how do I calculate that?”. For example, the averages in the ACF are calculated over different things, which can be captured by grouping.
+When I see an equation my first though is “how do I calculate that?”. For example, the averages in the ACF are calculated over different things, which can be captured by grouping in the code.
 
 The last part is to find the deterministic and stochastic component, which produce respectively the first and second moments (see paper for details). The first moment is the average “jump” from a specific population state. The second moment is the variance of such “jumps”. In this case there are only two possible individual states, only one degree of freedom to describe the state of the entire population, but in more complex cases a “jump” could be a vector in a multidimensional state space.
 
-Comparing the two models we see that the deterministic component “pushes” the population towards non-consensus in the voter model (equal number of individuals for both options), while there are two stable equilibria separated by and unstable equilibrium in the higher interaction model (equilibria are found when the “push” is equal to zero, and equilibria are stable when the “push” goes towards the equilibrium). For both models the noise is stronger when the population is undecided because there is more uncertainty in the reactions that can occur (the reactions have similar velocities), which is the definition of intrinsic noise. Hence, the voter model is pushed away from its non-consensus equilibrium condition, leading to noise induced consensus. Noise constructs order!
+Comparing the two models we see that the deterministic component “pushes” the population towards non-consensus in the voter model (equal number of individuals for both options), while there are two stable equilibria separated by and unstable equilibrium in the higher interaction model (equilibria are found when the “push” is equal to zero, and equilibria are stable when the “push” goes towards the equilibrium). For both models the noise is stronger when the population is undecided because there is more uncertainty in the reactions that can occur (the reactions have similar velocities), which is the definition of intrinsic noise. Hence, the voter model is pushed away from its non-consensus equilibrium condition, leading to noise induced consensus. 
