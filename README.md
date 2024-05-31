@@ -35,7 +35,7 @@ The replication of the results consists of two parts, one applied to the voter m
 
 To fit the data, we first have to find the autocorrelation function for figuring out the best time scale (see paper for details).
 
-$$ACF(τ) = \frac{COV(M(t), M(τ))}{VAR(M(t))}$$
+$$ACF(τ) = \frac{COV(M(t), M(t + τ))}{VAR(M(t))}$$
 
 The code implementation avoids loops and uses vectorized operations on dataframes, sacrificing memory for a faster execution.
 
