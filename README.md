@@ -37,9 +37,7 @@ To fit the data, we first have to find the autocorrelation function for figuring
 
 $$ACF(τ) = \frac{COV(M(t), M(τ))}{VAR(M(t))}$$
 
-ACF(τ)=⟨(M(t)−⟨M(t)⟩)(M(t+τ)−⟨M(t)⟩)⟩ / ⟨(M(t)−⟨M(t)⟩)2⟩
-
-When I see an equation my first thought is “how do I calculate that?”. For example, the averages in the ACF are calculated over different things, which can be captured by grouping in the code.
+The code implementation avoids loops and uses vectorized operations on dataframes, sacrificing memory for a faster execution.
 
 The last part is to find the deterministic and stochastic component, which produce respectively the first and second moments (see paper for details). The first moment is the average “jump” from a specific population state. The second moment is the variance of such “jumps”. 
 
