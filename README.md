@@ -31,7 +31,10 @@ It could be a good test to modify the code to simulate clonal logistic growth by
 
 ## Part 2: Replication of the results of the paper 
 
-The replication of the results consists of two parts, one applied to the voter model, and one applied to the higher order interactions model (see the paper for details). The only difference between the two is that the higher order interactions also has a reaction of the type 2A + B -> 3A, which leads to a non-linear per capita rate of change in the ordinary differential equation and consensus formation with multi-stability in the limit of infinite population size (not present in the voter model). For each model it is shown examples of the dynamics through 20 replicates of the time series obtained iterating the Gillespie algorithm and the probability density of the population being in certain states. Interestingly, also the voter model shows consensus and multi-stability! This is because of the constructive effect of intrinsic noise. To better understand this result, it is possible to fit a Langevin equation to the time series we have simulated and find the functional form of the deterministic (drift) and stochastic (diffusion) terms. Despite the Langevin equation being an approximation, it explicitly defines a term for stochasticity, enabling us to investigate noise.
+The replication of the results consists of two parts, one applied to the voter model, and one applied to the higher order interactions model (see the paper for details). The only difference between the two is that the higher order interactions also has a reaction of the type 2A + B -> 3A, which leads to a non-linear per capita rate of change in the ordinary differential equation and consensus formation with multi-stability in the limit of infinite population size (not present in the voter model). For each model it is shown examples of the dynamics through 20 replicates of the time series obtained iterating the Gillespie algorithm and the probability density of the population being in certain states. Interestingly, also the voter model shows consensus and multi-stability! 
+![voter_density](https://github.com/MarcoFele98/noise/assets/122376407/1d38f3d1-ab8a-40db-9924-722e77d7df15)
+
+This is because of the constructive effect of intrinsic noise. To better understand this result, it is possible to fit a Langevin equation to the time series we have simulated and find the functional form of the deterministic (drift) and stochastic (diffusion) terms. Despite the Langevin equation being an approximation, it explicitly defines a term for stochasticity, enabling us to investigate noise.
 
 To fit the data, we first have to find the autocorrelation function for figuring out the best time scale (see paper for details).
 
@@ -43,6 +46,7 @@ The code implementation avoids loops and uses vectorized operations on dataframe
 The last part is to find the deterministic and stochastic component, which produce respectively the first and second moments (see paper for details). The first moment is the average “jump” from a specific population state. The second moment is the variance of such “jumps”. 
 
 Comparing the two models we see that the deterministic component “pushes” the population towards non-consensus in the voter model (equal number of individuals for both options), while there are two stable equilibria separated by and unstable equilibrium in the higher interaction model (equilibria are found when the “push” is equal to zero, and equilibria are stable when the “push” goes towards the equilibrium). For both models the noise is stronger when the population is undecided because there is more uncertainty in the reactions that can occur (the reactions have similar velocities), which is the definition of intrinsic noise. Hence, the voter model is pushed away from its non-consensus equilibrium condition, leading to noise induced consensus. 
-![voter_fit](https://github.com/MarcoFele98/noise/assets/122376407/50e5f9f0-bd72-4a55-bcf4-52205def6a23)
-![ternary_fit](https://github.com/MarcoFele98/noise/assets/122376407/5dbde317-22cd-47b3-b056-c898b2c2aa29)
+![voter_fit](https://github.com/MarcoFele98/noise/assets/122376407/132d70f1-b661-425c-b31c-40058d80e473)
+![ternary_fit](https://github.com/MarcoFele98/noise/assets/122376407/637126de-7d84-4d18-b1fd-ac7104711468)
+
 
