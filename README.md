@@ -38,7 +38,11 @@ To fit the data, we first have to find the autocorrelation function for figuring
 $$ACF(τ) = \frac{COV(M(t), M(t + τ))}{VAR(M(t))}$$
 
 The code implementation avoids loops and uses vectorized operations on dataframes, sacrificing memory for a faster execution.
+![acf](https://github.com/MarcoFele98/noise/assets/122376407/881db1e3-6aa6-425c-84a5-3faa46efda38)
 
 The last part is to find the deterministic and stochastic component, which produce respectively the first and second moments (see paper for details). The first moment is the average “jump” from a specific population state. The second moment is the variance of such “jumps”. 
 
 Comparing the two models we see that the deterministic component “pushes” the population towards non-consensus in the voter model (equal number of individuals for both options), while there are two stable equilibria separated by and unstable equilibrium in the higher interaction model (equilibria are found when the “push” is equal to zero, and equilibria are stable when the “push” goes towards the equilibrium). For both models the noise is stronger when the population is undecided because there is more uncertainty in the reactions that can occur (the reactions have similar velocities), which is the definition of intrinsic noise. Hence, the voter model is pushed away from its non-consensus equilibrium condition, leading to noise induced consensus. 
+![voter_fit](https://github.com/MarcoFele98/noise/assets/122376407/50e5f9f0-bd72-4a55-bcf4-52205def6a23)
+![ternary_fit](https://github.com/MarcoFele98/noise/assets/122376407/5dbde317-22cd-47b3-b056-c898b2c2aa29)
+
